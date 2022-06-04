@@ -10,7 +10,7 @@ public class CompareExample {
         Comparator<Person> pcomp = new PersonNameComparator()
                 .thenComparing(new PersonAgeComparator());
 //        SortedSet<Person> persons = new TreeSet<>(personComparator);
-        SortedSet<Person> persons = new TreeSet<>(personComparator);
+        SortedSet<Person> persons = new TreeSet<>();
         persons.add(new Person("Vasya"));
         persons.add(new Person("Petya"));
         persons.add(new Person("Dima"));

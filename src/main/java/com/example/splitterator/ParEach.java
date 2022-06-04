@@ -12,7 +12,8 @@ public class ParEach<T> extends CountedCompleter<Void> {
     ParEach(ParEach<T> parent, Spliterator<T> spliterator,
             Consumer<T> action, long targetBatchSize) {
         super(parent);
-        this.spliterator = spliterator; this.action = action;
+        this.spliterator = spliterator;
+        this.action = action;
         this.targetBatchSize = targetBatchSize;
     }
 

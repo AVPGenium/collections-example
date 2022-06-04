@@ -6,13 +6,14 @@ import java.util.concurrent.atomic.AtomicLong;
 
 class Producer implements Runnable {
     private final BlockingQueue queue;
-    private AtomicLong counter = new AtomicLong();
+    private static AtomicLong counter = new AtomicLong();
 
     Producer(BlockingQueue q) { queue = q; }
 
     public void run() {
         try {
             while (true) {
+                //Thread.sleep(100);
                 queue.put(produce());
                 counter.incrementAndGet();
                 System.out.println("Produced element #" + counter.get());

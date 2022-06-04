@@ -9,7 +9,9 @@ public class TaggedArraySpliterator<T> implements Spliterator<T> {
     private final int fence; // one past the greatest index
 
     TaggedArraySpliterator(Object[] array, int origin, int fence) {
-        this.array = array; this.origin = origin; this.fence = fence;
+        this.array = array;
+        this.origin = origin;
+        this.fence = fence;
     }
 
     public void forEachRemaining(Consumer<? super T> action) {

@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Consumer implements Runnable {
     private final BlockingQueue queue;
-    private AtomicLong counter = new AtomicLong();
+    private static AtomicLong counter = new AtomicLong();
 
     Consumer(BlockingQueue q) { queue = q; }
 

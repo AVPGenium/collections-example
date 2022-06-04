@@ -1,5 +1,7 @@
 package com.example.collection;
 
+import com.example.iterator.TextFileIterator;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,7 +48,7 @@ public class TextFile implements Collection<String> {
 
     @Override
     public Iterator<String> iterator() {
-        return lines.iterator();
+        return new TextFileIterator(filename);
     }
 
     @Override
