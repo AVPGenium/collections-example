@@ -1,8 +1,10 @@
 package com.example.collection;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 public class TextFile implements Collection<String> {
     private final String filename;
@@ -11,8 +13,8 @@ public class TextFile implements Collection<String> {
     public TextFile(String filename) {
         this.filename = filename;
         this.lines = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(filename));
+        try (InputStream is = TextFile.class.getClassLoader().getResourceAsStream(filename);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(is))){
             int i = 0;
             String line;
             line = reader.readLine();
@@ -34,7 +36,7 @@ public class TextFile implements Collection<String> {
 
     @Override
     public boolean isEmpty() {
-        return lines.isEmpty();
+        return lines.size() == 0;
     }
 
     @Override
@@ -49,22 +51,31 @@ public class TextFile implements Collection<String> {
 
     @Override
     public Object[] toArray() {
-        return lines.toArray();
+        return new Object[0];
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return lines.toArray(a);
+        return null;
     }
 
     @Override
-    public boolean add(String e) {
-        return lines.add(e);
+    public boolean add(String s) {
+        try {
+            FileWriter writer = new FileWriter(TextFile.class.getClassLoader().getResource(filename).getPath(), true);
+            BufferedWriter bufferWriter = new BufferedWriter(writer);
+            bufferWriter.write(s);
+            bufferWriter.close();
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        }
+        return lines.add(s);
     }
 
     @Override
     public boolean remove(Object o) {
-        return lines.remove(o);
+        return false;
     }
 
     @Override
@@ -90,10 +101,5 @@ public class TextFile implements Collection<String> {
     @Override
     public void clear() {
 
-    }
-
-    @Override
-    public Spliterator<String> spliterator() {
-        return Collection.super.spliterator();
     }
 }
