@@ -61,13 +61,10 @@ public class TextFile implements Collection<String> {
 
     @Override
     public boolean add(String s) {
-        try {
-            FileWriter writer = new FileWriter(TextFile.class.getClassLoader().getResource(filename).getPath(), true);
-            BufferedWriter bufferWriter = new BufferedWriter(writer);
+        try(FileWriter writer = new FileWriter(TextFile.class.getClassLoader().getResource(filename).getPath(), true);
+            BufferedWriter bufferWriter = new BufferedWriter(writer)){
             bufferWriter.write(s);
-            bufferWriter.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
         return lines.add(s);
@@ -85,7 +82,19 @@ public class TextFile implements Collection<String> {
 
     @Override
     public boolean addAll(Collection<? extends String> c) {
-        return false;
+        try(FileWriter writer = new FileWriter(TextFile.class.getClassLoader().getResource(filename).getPath(), true);
+            BufferedWriter bufferWriter = new BufferedWriter(writer)){
+            c.forEach(element -> {
+                try {
+                    bufferWriter.write(element);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+        return lines.addAll(c);
     }
 
     @Override
@@ -100,6 +109,12 @@ public class TextFile implements Collection<String> {
 
     @Override
     public void clear() {
-
+        try(FileWriter writer = new FileWriter(TextFile.class.getClassLoader().getResource(filename).getPath());
+            BufferedWriter bufferWriter = new BufferedWriter(writer)){
+            bufferWriter.write("");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        lines.clear();
     }
 }
