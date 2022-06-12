@@ -9,7 +9,8 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>homework</module>
+        <module>homework_2</module>
+        <module>homework_1</module>
     </modules>
     <dependencies>
         <dependency>

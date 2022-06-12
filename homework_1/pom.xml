@@ -9,7 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>homework</artifactId>
+    <artifactId>homework_1</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.9</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
